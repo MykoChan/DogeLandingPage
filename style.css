@@ -8,7 +8,7 @@ body {
 .hero,
 .content,
 .CTA {
-    padding: 20px 100px 20px 100px;
+    padding: 20px 150px 20px 150px;
 }
 
 .header,
@@ -55,7 +55,6 @@ body {
 }
 
 .hero-text {
-    flex-basis: 400px;
     display: flex;
     flex-direction: column;
     text-align: left;
