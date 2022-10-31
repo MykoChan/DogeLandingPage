@@ -102,8 +102,10 @@ h1 {
 }
 
 .quote-container {
-    background-color: white;
+    background-color: #E5E7EB;
     padding: 25px 200px;
+    text-align: left;
+    margin: 0;
 }
 
 .quote {
