@@ -21,7 +21,7 @@ colorPicker.addEventListener('input', setCurrentColor)
 pencilButton.addEventListener('click', setCurrentMode)
 eraserButton.addEventListener('click', setCurrentMode)
 clearButton.addEventListener('click', clearCanvas)
-canvasSizeSlider.addEventListener('click', updateCanvasSizeText)
+canvasSizeSlider.addEventListener('mousemove', updateCanvasSizeText)
 canvasSizeSlider.addEventListener('click', updateCanvasSize)
 
 document.body.onmousedown = () => (mousedown = true);
@@ -70,7 +70,7 @@ function updateCanvasSizeText(e) {
 
 function updateCanvasSize(e) {
     canvasSize = e.target.value;
-    updateCanvasSizeText(e.target.value)
+    updateCanvasSizeText(e)
     clearCanvas();
 }
 
