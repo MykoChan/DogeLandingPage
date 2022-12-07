@@ -3,8 +3,30 @@ let operandTwo = '';
 let currentOperator = '';
 let shouldClear = false;
 
+const historyScreen = document.querySelector('.calculator-history');
+const inputScreen = document.querySelector('.calculator-input');
+const clearButton = document.querySelector(".clear");
+const deleteButton = document.querySelector(".delete");
+const equalsButton = document.querySelector("#equals");
+const decimalButton = document.querySelector("#decimal");
+const numberButtons = document.querySelectorAll("[data-number]");
+const operatorButtons = document.querySelectorAll("[data-operator]");
+
+clearButton.addEventListener('click', clear);
+deleteButton.addEventListener('click', deleteNumber);
+equalsButton.addEventListener('click', evaluate);
+decimalButton.addEventListener('click', appendDecimal);
+document.body.addEventListener('keydown', handleKeyboardInput);
+
+operatorButtons.forEach((operatorButton) => {
+    operatorButton.addEventListener('click', () => addOperator(operatorButton.textContent));
+});
+
+numberButtons.forEach((numberButton) => {
+    numberButton.addEventListener('click', () => appendNumber(numberButton.textContent))
+})
+
 function operate(operator, num1, num2) {
-    console.log(`operate on : ${num1} ${operator} ${num2}`)
     if (operator == "+") {
         return num1 + num2;
     } else if (operator == "-") {
@@ -17,12 +39,12 @@ function operate(operator, num1, num2) {
     }
 }
 
-function clear() {
-    inputScreen.textContent = '0';
-    historyScreen.textContent = '';
-    operandOne = '';
-    operandTwo = '';
-    currentOperator = '';
+function appendNumber(number) {
+    if (inputScreen.textContent == '0' || shouldClear) {
+        inputScreen.textContent = '';
+    }
+    inputScreen.append(number);
+    shouldClear = false;
 }
 
 function deleteNumber() {
@@ -32,13 +54,27 @@ function deleteNumber() {
     }
 }
 
-function addOperator(e) {
+function clear() {
+    inputScreen.textContent = '0';
+    historyScreen.textContent = '';
+    operandOne = '';
+    operandTwo = '';
+    currentOperator = '';
+}
+
+function addOperator(operator) {
     if (currentOperator) evaluate(); // If there's already an operator selected, then that means there's an equation to evaluate.
-    currentOperator = e.target.textContent;
+    currentOperator = operator;
     operandOne = inputScreen.textContent;
     operandTwo = '';
     historyScreen.textContent = `${operandOne} ${currentOperator}`;
     shouldClear = true;
+}
+
+function appendDecimal() {
+    if (!inputScreen.textContent.includes(".")) {
+        inputScreen.textContent += ".";
+    }
 }
 
 function evaluate() {
@@ -50,7 +86,6 @@ function evaluate() {
         alert("Cannot divide by 0!");
         return;
     }
-    console.log(`Evaluating ${operandOne} ${currentOperator} ${operandTwo}`)
     if (!operandTwo) {
         operandTwo = inputScreen.textContent;
     }
@@ -64,36 +99,18 @@ function roundResult(number) {
     return Math.round(number*10000)/10000;
 }
 
-function addDecimal() {
-    if (!inputScreen.textContent.includes(".")) {
-        inputScreen.textContent += ".";
-    }
+function handleKeyboardInput(e) {
+    if (e.key >= 0 && e.key <= 9) appendNumber(e.key);
+    if (e.key == ".") appendDecimal();
+    if (e.key == "=" || e.key == "Enter") evaluate();
+    if (e.key == "+" || e.key == "-" || e.key == "*" || e.key == "/") addOperator(convertOperator(e.key));
+    if (e.key == "Backspace") deleteNumber();
+    if (e.key == "Escape") clear();
 }
 
-const historyScreen = document.querySelector('.calculator-history');
-const inputScreen = document.querySelector('.calculator-input');
-const clearButton = document.querySelector(".clear");
-const deleteButton = document.querySelector(".delete");
-const equalsButton = document.querySelector("#equals");
-const numberButtons = document.querySelectorAll("[data-number]");
-const operatorButtons = document.querySelectorAll("[data-operator]");
-const decimalButton = document.querySelector("#decimal");
-
-clearButton.addEventListener('click', clear);
-deleteButton.addEventListener('click', deleteNumber);
-equalsButton.addEventListener('click', evaluate);
-decimalButton.addEventListener('click', addDecimal);
-
-operatorButtons.forEach((operatorButton) => {
-    operatorButton.addEventListener('click', addOperator);
-});
-
-numberButtons.forEach((numberButton) => {
-    numberButton.addEventListener('click', () => {
-        if (inputScreen.textContent == '0' || shouldClear) {
-            inputScreen.textContent = '';
-        }
-        inputScreen.append(numberButton.textContent);
-        shouldClear = false;
-    })
-})
+function convertOperator(operator) {
+    if (operator == "-") return "-";
+    if (operator == "+") return "+";
+    if (operator == "*") return "×";
+    if (operator == "/") return "÷";
+}
