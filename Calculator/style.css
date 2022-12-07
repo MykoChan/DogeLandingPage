@@ -1,13 +1,21 @@
-/* * {
-    border: 1px solid red;
-} */
+:root {
+    --background: #f6f6f6;
+    --border: black;
+    --btn-hover: #ddd;
+    --btn-active: #ccc;
+    --btn-red: #faa;
+    --btn-red-hover: #e99;
+    --btn-red-active: #d88;
+    --btn-blue: #aaf;
+    --btn-blue-hover: #99e;
+    --btn-blue-active: #88d;
+}
 
 .calculator {
     display: flex;
     width: 400px;
-    height: 400px;
     background-color: beige;
-    border: 1px solid black;
+    border: 5px solid var(--border);
     border-radius: 5px;
     padding: 10px;
     flex-direction: column;
@@ -15,10 +23,8 @@
 
 .calculator-screen {
     display: flex;
-    height: 120px;
-    width: 100%;
     background-color: white;
-    border: 1px solid black;
+    border: 3px solid var(--border);
     border-radius: 5px;
     flex-direction: column;
     text-align: right;
@@ -26,17 +32,17 @@
 }
 
 .calculator-history {
+    padding: 10px 10px 0px 10px;
     min-height: 32px;
-    font-size: 20px;
-    height: 50px;
-    width: auto;
+    font-size: 18px;
+    word-wrap: break-word;
 }
 
 .calculator-input {
+    padding: 10px 10px 0px 10px;
     min-height: 64px;
-    font-size: 20px;
-    height: 100px;
-    width: auto;
+    font-size: 36px;
+    word-wrap: break-word;
 }
 
 .button-panel {
@@ -47,12 +53,42 @@
     grid-gap: 10px;
 }
 
-.button {
+.btn {
     padding: 20px;
-    border: 2px var(--border) solid;
     border-radius: 5px;
-    background-color: var(--btn);
     font-size: 20px;
+}
+
+.btn:hover {
+    background-color: var(--btn-hover);
+}
+
+.btn:active {
+    background-color: var(--btn-active);
+}
+
+.btn-red {
+    background-color: var(--btn-red);
+  }
+  
+.btn-red:hover {
+    background-color: var(--btn-red-hover);
+}
+
+.btn-red:active {
+    background-color: var(--btn-red-active);
+}
+
+.btn-blue {
+    background-color: var(--btn-blue);
+}
+
+.btn-blue:hover {
+    background-color: var(--btn-blue-hover);
+}
+
+.btn-blue:active {
+    background-color: var(--btn-blue-active);
 }
 
 .clear {
