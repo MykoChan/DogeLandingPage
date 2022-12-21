@@ -1,0 +1,101 @@
+:root {
+    --color: #e6007e;
+    --txt: rgb(185, 185, 185);
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Poppins', sans-serif;
+    /* outline: 1px solid red; */
+}
+
+@font-face {
+    font-family: 'Norse Bold';
+    src: url(https://cdn.statically.io/gh/TheOdinProject/theodinproject/efdc2888072f409e687d31dc580595dbe4fe0ff4/app/assets/fonts/Norse-Bold.otf);
+}
+
+.content {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.left-hero {
+    background: #000 url("./img/background.jpg") no-repeat center;
+    width: 40vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.logo-background {
+    position: relative;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    font-size: 2em;
+    color: white;
+    top: 20vh;
+    height: 10vh;
+    font-family: 'Norse Bold', 'Courier New', Courier, monospace !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.logo-background > img {
+    height: 100%;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    width: 60vw;
+    background-color: black;
+}
+
+.right-content {
+    display: flex;
+    color: gray;
+    flex-flow: column nowrap;    
+    gap: 30px;
+    padding-left: 3vw;
+}
+
+.right-content > p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+}
+
+.form {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 20px;
+    padding: 20px 0px 20px 0px;
+}
+
+.input {
+    display: flex;
+    flex-flow: column wrap;
+    width: 40%;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+}
+
+input {
+    background-color: black;
+    border: 1px solid rgb(75,75,75);
+    border-radius: 3px;
+}
+
+.create-account {
+    background-color: black;
+    color: var(--color);
+    font-weight: 700;
+    font-size: 1.2em;
+    border: 2px solid var(--color);
+    border-radius: 5px;
+    padding: 10px 40px;
+    margin: 40px 0;
+}
