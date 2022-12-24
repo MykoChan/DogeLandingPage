@@ -1,59 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <title>Forms</title>
-</head>
-<body>
-    <div class="content">
-        <div class="left-hero">
-            <div class="logo-background">
-                <img src="./img/odin-lined.png">
-                <p>Odin</p>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./style.css" />
+        <title>Forms</title>
+    </head>
+    <body>
+        <div class="content">
+            <div class="left-hero">
+                <div class="logo-background">
+                    <img src="./img/odin-lined.png" />
+                    <p>Odin</p>
+                </div>
+            </div>
+            <div class="right">
+                <div class="right-content">
+                    <p>
+                        This is my sign up template! This is where I'd describe
+                        what you're signing up for. Next, I'd take your
+                        information and... well. That's for me to know and for
+                        you to find out.
+                    </p>
+                    <form action="submit">
+                        <div class="form">
+                            <div class="input">
+                                <label for="first-name">First Name</label>
+                                <input type="text" id="first-name" />
+                            </div>
+
+                            <div class="input">
+                                <label for="last-name">Last Name</label>
+                                <input type="text" id="last-name" />
+                            </div>
+
+                            <div class="input">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" />
+                            </div>
+
+                            <div class="input">
+                                <label for="phone-number">Phone Number</label>
+                                <input type="text" id="phone-number" />
+                            </div>
+
+                            <div class="input">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" />
+                            </div>
+
+                            <div class="input">
+                                <label for="confirm-password"
+                                    >Confirm Password</label
+                                >
+                                <input type="password" id="confirm-password" />
+                            </div>
+                        </div>
+                        <button class="create-account">Create Account</button>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="right">
-            <div class="right-content">
-                <p> This is my sign up template! This is where I'd describe what you're signing up for. Next, I'd take your information and... well. That's for me to know and for you to find out.</p>
-                <form action="submit">
-                    <div class="form">
-                        <div class="input">
-                            <label for="first-name">First Name</label>
-                            <input type="text" id="first-name">
-                        </div>
-                
-                        <div class="input">
-                            <label for="last-name">Last Name</label>
-                            <input type="text" id="last-name">
-                        </div>
-                
-                        <div class="input">
-                            <label for="email">Email</label>
-                            <input type="email" id="email">
-                        </div>
-                
-                        <div class="input">
-                            <label for="phone-number">Phone Number</label>
-                            <input type="text" id="phone-number">
-                        </div>
-                
-                        <div class="input">
-                            <label for="password">Password</label>
-                            <input type="password" id="password">
-                        </div>
-                
-                        <div class="input">
-                            <label for="confirm-password">Confirm Password</label>
-                            <input type="password" id="confirm-password">
-                        </div>
-                    </div>
-                    <button class="create-account">Create Account</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</body>
+    </body>
 </html>

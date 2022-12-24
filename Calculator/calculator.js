@@ -15,11 +15,14 @@ const operatorButtons = document.querySelectorAll("[data-operator]");
 function operate(operator, num1, num2) {
     if (operator === "+") {
         return num1 + num2;
-    } if (operator === "-") {
+    }
+    if (operator === "-") {
         return num1 - num2;
-    } if (operator === "×") {
+    }
+    if (operator === "×") {
         return num1 * num2;
-    } if (operator === "÷") {
+    }
+    if (operator === "÷") {
         if (num2 === 0) return null;
         return num1 / num2;
     }
@@ -36,7 +39,7 @@ function appendNumber(number) {
 
 function deleteNumber() {
     inputScreen.textContent = inputScreen.textContent.slice(0, -1);
-    if (inputScreen.textContent == "") {
+    if (inputScreen.textContent === "") {
         inputScreen.textContent = "0";
     }
 }
@@ -66,7 +69,9 @@ function evaluate() {
         operandTwo = inputScreen.textContent;
     }
     historyScreen.textContent = `${operandOne} ${currentOperator} ${operandTwo} =`;
-    operandOne = roundResult(operate(currentOperator, Number(operandOne), Number(operandTwo)));
+    operandOne = roundResult(
+        operate(currentOperator, Number(operandOne), Number(operandTwo))
+    );
     inputScreen.textContent = operandOne;
     currentOperator = "";
 }
@@ -99,7 +104,8 @@ function handleKeyboardInput(e) {
     if (e.key >= 0 && e.key <= 9) appendNumber(e.key);
     if (e.key === ".") appendDecimal();
     if (e.key === "=" || e.key === "Enter") evaluate();
-    if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/") addOperator(convertOperator(e.key));
+    if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/")
+        addOperator(convertOperator(e.key));
     if (e.key === "Backspace") deleteNumber();
     if (e.key === "Escape") clear();
 }
@@ -111,9 +117,13 @@ decimalButton.addEventListener("click", appendDecimal);
 document.body.addEventListener("keydown", handleKeyboardInput);
 
 operatorButtons.forEach((operatorButton) => {
-    operatorButton.addEventListener("click", () => addOperator(operatorButton.textContent));
+    operatorButton.addEventListener("click", () =>
+        addOperator(operatorButton.textContent)
+    );
 });
 
 numberButtons.forEach((numberButton) => {
-    numberButton.addEventListener("click", () => appendNumber(numberButton.textContent));
+    numberButton.addEventListener("click", () =>
+        appendNumber(numberButton.textContent)
+    );
 });
