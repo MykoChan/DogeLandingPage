@@ -1,0 +1,61 @@
+/* * {
+    border: 1px solid red;
+} */
+
+.header {
+    background-color: white;
+}
+
+body {
+    background-color: #f0eef1;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    word-wrap: break-word;
+    /* footer support */
+    margin-bottom: 100px;
+  }
+
+.books-container {
+    background-color: #f0eef1;
+    /* grid-template-rows: repeat(5, 1fr); */
+    /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 25px;
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    width: 20%;
+    font-size: 20px;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 3px;
+    background-color: white;
+    box-shadow: grey;
+    line-height: 1.2;
+}
+
+.btn {
+    padding: 15px;
+    border-radius: 3px;
+    border: none;
+}
+
+.btn-light-green {
+    background-color: #9fff9c;
+}
+
+.btn-light-red {
+    background-color: #ff7070;
+}
