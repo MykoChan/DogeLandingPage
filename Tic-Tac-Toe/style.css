@@ -1,0 +1,67 @@
+:root {
+    --border-color: black;
+}
+
+.ttt-screen {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+    padding: 25px;
+    width: 250px;
+    margin: auto;
+}
+
+.ttt-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 25px;
+}
+
+.ttt-board {
+    display: grid;
+    grid-template-columns: 80px 80px 80px;
+    grid-template-rows: 80px 80px 80px;
+    background-color: white;
+    justify-content: center;
+    padding: 50px;
+}
+
+.ttt-tile {
+    background-color: transparent;
+    text-align: center;
+    justify-content: center;
+    border: 0px;
+    font-size: 60px;
+}
+
+.border-right {
+    border-right: 1px solid var(--border-color);
+}
+
+.border-bottom {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.btn {
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 35px;
+}
+
+.bot {
+    background-image: url("./img/bot.png");
+    background-size: cover;
+}
+
+.vs-player {
+    background-image: url("./img/vs-player.png");
+    background-size: cover;
+}
+
+.restart {
+    flex: 1;
+    font-size: 20px;
+    font-family: "Montserrat", "sans-serif";
+}
