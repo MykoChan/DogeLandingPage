@@ -1,81 +1,136 @@
-const playerFactory = (sign) => {
-    const _sign = sign.toLowerCase();
-    let _wins = 0;
+// TODOs
+// Make use of player factory
+// Add player names
+// Use player objects to keep track of win/loss record
+// Move controller logic out of playerStep and into displayController
+// Add AI/bot option
+// Add different bot difficulties
 
-    const getWins = () => _wins;
-    const addWin = () => _wins++;
-    const getSign = () => _sign;
+// const playerFactory = (sign) => {
+//     const _sign = sign.toLowerCase();
+//     let _wins = 0;
 
-    return {
-        getWins,
-        addWin,
-        getSign,
-    };
-};
+//     const getWins = () => _wins;
+//     const addWin = () => _wins++;
+//     const getSign = () => _sign;
+
+//     return {
+//         getWins,
+//         addWin,
+//         getSign,
+//     };
+// };
 
 const gameboard = (() => {
     const _board = new Array(9);
     let _moveCount = 0;
 
-    function getTile(num) {
-        return _board[num];
-    }
+    const getMoveCount = () => _moveCount;
 
-    // function checkWin() {
-    //     const
-    // }
+    const getTile = (num) => _board[num];
+
+    const getCurrentPlayerSign = () => (_moveCount % 2 === 0 ? "X" : "O");
+
+    const incrementMoves = () => {
+        _moveCount += 1;
+    };
+
+    const checkWin = (index, sign) => {
+        const winConditions = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6],
+        ];
+        return winConditions
+            .filter((applicableWinningCombinations) =>
+                applicableWinningCombinations.includes(index)
+            )
+            .some((possibleWinningCombinations) =>
+                possibleWinningCombinations.every(
+                    (tileIndex) => _board[tileIndex] === sign
+                )
+            );
+    };
 
     const setTile = (sign, num) => {
         const tile = document.querySelector(
             `.ttt-board div:nth-child(${num + 1})`
         );
         _board[num] = sign;
-        _moveCount += 1;
         tile.textContent = sign;
     };
 
     function restart() {
-        _moveCount = 0;
         for (let i = 0; i < 9; i++) {
             _board[i] = "";
             setTile("", i);
         }
+        _moveCount = 0;
+        displayController.updateStatus("Player X's turn");
     }
-
-    const numMoves = () => _moveCount;
 
     return {
         setTile,
         getTile,
-        numMoves,
+        getMoveCount,
+        getCurrentPlayerSign,
         restart,
-        // checkWin,
+        checkWin,
+        incrementMoves,
     };
 })();
 
 const gameController = (() => {
-    const player1 = playerFactory("x");
-    const player2 = playerFactory("o");
+    // const player1 = playerFactory("x");
+    // const player2 = playerFactory("o");
+
+    let _gameOver = false;
 
     const playerStep = (num) => {
+        if (_gameOver) return;
         if (
             gameboard.getTile(num) === undefined ||
             gameboard.getTile(num) === ""
         ) {
-            if (gameboard.numMoves() % 2 === 0) {
-                gameboard.setTile(player1.getSign(), num);
+            gameboard.setTile(gameboard.getCurrentPlayerSign(), num);
+            if (gameboard.checkWin(num, gameboard.getCurrentPlayerSign())) {
+                _gameOver = true;
+                displayController.updateStatus(
+                    `Player ${gameboard.getCurrentPlayerSign()} wins!`
+                );
             } else {
-                gameboard.setTile(player2.getSign(), num);
+                gameboard.incrementMoves();
+                if (gameboard.getMoveCount() >= 9) {
+                    displayController.updateStatus("Tie game!");
+                } else {
+                    displayController.updateStatus(
+                        `Player ${gameboard.getCurrentPlayerSign()}'s turn`
+                    );
+                }
             }
         }
     };
-    return { playerStep };
+
+    const reset = () => {
+        _gameOver = false;
+    };
+
+    return {
+        playerStep,
+        reset,
+    };
 })();
 
 const displayController = (() => {
     const ticTacToeBoard = document.querySelector(".ttt-board");
     const restartButton = document.querySelector(".restart");
     const tiles = document.querySelectorAll(".ttt-tile");
+    const gameStatus = document.querySelector(".game-status");
 
     tiles.forEach((tile) => {
         const index = parseInt(tile.attributes["data-index"].value, 10);
@@ -97,7 +152,14 @@ const displayController = (() => {
 
     const resetBoard = function () {
         gameboard.restart();
+        gameController.reset();
+    };
+
+    const updateStatus = (statusString) => {
+        gameStatus.textContent = statusString;
     };
 
     restartButton.addEventListener("click", resetBoard);
+
+    return { updateStatus };
 })();
