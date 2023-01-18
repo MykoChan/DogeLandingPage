@@ -21,7 +21,6 @@ body {
 }
 
 .pixel {
-    background: white;
     text-align: center;
     width: auto;
     height: auto;
@@ -47,16 +46,6 @@ button {
     justify-content:space-between;
 }
 
-#pencil,
-#eraser,
-#clear {
-    background-size: cover;
-    width: 50px;
-    height: 50px;
-    border: 1px solid black;
-    border-radius: 10%;
-}
-
 #pencil {
     background-image: url("./img/pencil.png");
 }
@@ -65,24 +54,50 @@ button {
     background-image: url("./img/eraser.png");
 }
 
+#fill-bucket {
+    background-image: url("./img/fill.png");
+}
+
 #clear {
     background-image: url("./img/bin.png");
     background-color: #faa;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* padding: 10px 40px; */
 }
 
+/* .pencil,
+.eraser,
+.fill-bucket,
+.clear { */
+#pencil,
+#eraser,
+#fill-bucket,
+#clear {
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border: 2px solid black;
+    border-radius: 10%;
+}
+
+/* .pencil:hover,
+.eraser:hover,
+.fill-bucket:hover,
+.clear:hover { */
 #pencil:hover,
 #eraser:hover,
+#fill-bucket:hover,
 #clear:hover {
     transform: scale(1.15);
 }
 
+/* .pencil.button-selected,
+.eraser.button-selected,
+.fill-bucket.button-selected { */
 #pencil.button-selected,
 #eraser.button-selected,
-#clear.button-selected {
+#fill-bucket.button-selected {
     /* background-color: black;
     color: white; */
     border: 5px solid black;
@@ -93,6 +108,7 @@ button {
     width: 50px;
     height: 50px;
     overflow: hidden;
+    border: 2px solid black;
     border-radius: 100%;
     transition: transform 0.05s ease-in-out;
 }
@@ -120,4 +136,5 @@ button {
     border-radius: 50%;
     height: 100%;
     width: 100%;
+    border: 2px solid black;
 }

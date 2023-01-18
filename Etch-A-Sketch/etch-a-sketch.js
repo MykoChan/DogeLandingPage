@@ -1,6 +1,7 @@
 const container = document.querySelector(".grid-container");
 const pencilButton = document.querySelector("#pencil");
 const eraserButton = document.querySelector("#eraser");
+const fillButton = document.querySelector("#fill-bucket");
 const clearButton = document.querySelector("#clear");
 const colorPicker = document.querySelector("#color-picker");
 const canvasSizeText = document.querySelector("#canvas-size");
@@ -8,14 +9,16 @@ const canvasSizeSlider = document.querySelector("#canvas-size-slider");
 const colorPalette = document.querySelector("#color-palette");
 
 // Default values
-const DEFAULT_COLOR = "black";
+const DEFAULT_COLOR = "#000000";
 const DEFAULT_MODE = "pencil";
-const DEFAULT_SIZE = 16;
+const DEFAULT_SIZE = 32;
 
 let color = DEFAULT_COLOR;
+let oldColor = DEFAULT_COLOR;
 let currentMode = DEFAULT_MODE;
 let canvasSize = DEFAULT_SIZE;
 let mousedown = false;
+let canvas = [];
 
 document.body.onmousedown = () => {
     mousedown = true;
@@ -24,21 +27,71 @@ document.body.onmouseup = () => {
     mousedown = false;
 };
 
+function _fill(pixel) {
+    pixel.style.backgroundColor = color;
+    const row = pixel.getAttribute("data-row");
+    const column = pixel.getAttribute("data-column");
+
+    const topPixel = document.querySelector(
+        `.pixel[data-row='${+row - 1}'][data-column='${+column}']`
+    );
+    const bottomPixel = document.querySelector(
+        `.pixel[data-row='${+row + 1}'][data-column='${+column}']`
+    );
+    const leftPixel = document.querySelector(
+        `.pixel[data-row='${+row}'][data-column='${+column - 1}']`
+    );
+    const rightPixel = document.querySelector(
+        `.pixel[data-row='${+row}'][data-column='${+column + 1}']`
+    );
+
+    if (+row - 1 >= 0 && topPixel.style.backgroundColor === oldColor) {
+        _fill(topPixel);
+    }
+    if (+column - 1 >= 0 && leftPixel.style.backgroundColor === oldColor) {
+        _fill(leftPixel);
+    }
+    if (
+        +row + 1 < canvasSize &&
+        bottomPixel.style.backgroundColor === oldColor
+    ) {
+        _fill(bottomPixel);
+    }
+    if (
+        +column + 1 < canvasSize &&
+        rightPixel.style.backgroundColor === oldColor
+    ) {
+        _fill(rightPixel);
+    }
+}
+
 function draw(e) {
     if (e.type === "mouseover" && !mousedown) return;
     if (currentMode === "pencil") {
         e.target.style.backgroundColor = color;
     } else if (currentMode === "eraser") {
-        e.target.style.backgroundColor = "white";
+        e.target.style.backgroundColor = "#FFFFFF";
+    } else if (currentMode === "fill-bucket") {
+        oldColor = e.target.style.backgroundColor;
+        e.target.style.backgroundColor = color;
+        _fill(e.target);
     }
 }
 
 function setupGrid(size) {
+    canvas = new Array(size).fill(new Array(size).fill("#FFFFFF"));
     container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     container.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+
     for (let i = 0; i < size * size; i++) {
         const pixel = document.createElement("div");
+        const row = Math.floor(i / size);
+        const column = i % size;
         pixel.classList.add("pixel");
+        pixel.setAttribute("data-row", row);
+        pixel.setAttribute("data-column", column);
+
+        pixel.style.backgroundColor = canvas[row][column];
         pixel.addEventListener("mousedown", draw);
         pixel.addEventListener("mouseover", draw);
         container.appendChild(pixel);
@@ -56,14 +109,14 @@ function setCurrentColor(e) {
         color = e.target.value;
     } else if (e.target.classList.contains("color-tile")) {
         color = e.target.style.backgroundColor;
-        const newColor = rgb2hex(color);
-        colorPicker.value = newColor;
+        colorPicker.value = rgb2hex(color);
     }
 }
 
 function setCurrentMode(button) {
     pencilButton.classList.remove("button-selected");
     eraserButton.classList.remove("button-selected");
+    fillButton.classList.remove("button-selected");
     button.target.classList.add("button-selected");
     currentMode = button.target.id;
 }
@@ -78,7 +131,7 @@ function updateCanvasSizeText(e) {
 }
 
 function updateCanvasSize(e) {
-    canvasSize = e.target.value;
+    canvasSize = parseInt(e.target.value);
     updateCanvasSizeText(e);
     clearCanvas();
 }
@@ -177,7 +230,9 @@ function setupColorPalette() {
 
 window.onload = () => {
     pencilButton.classList.add("button-selected");
-    setupGrid(canvasSize);
+    canvasSizeText.innerText = `${DEFAULT_SIZE} x ${DEFAULT_SIZE}`;
+    canvasSizeSlider.value = DEFAULT_SIZE;
+    setupGrid(DEFAULT_SIZE);
     setupColorPalette();
 };
 
@@ -186,5 +241,6 @@ colorPicker.addEventListener("input", setCurrentColor);
 pencilButton.addEventListener("click", setCurrentMode);
 eraserButton.addEventListener("click", setCurrentMode);
 clearButton.addEventListener("click", clearCanvas);
+fillButton.addEventListener("click", setCurrentMode);
 canvasSizeSlider.addEventListener("mousemove", updateCanvasSizeText);
 canvasSizeSlider.addEventListener("click", updateCanvasSize);
