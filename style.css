@@ -1,9 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,200&family=Roboto&display=swap');
+
+/* * {
+    border: 1px solid red;
+} */
+
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: Poppins, Arial, Helvetica, sans-serif;
+}
+
+#about {
+    padding: 225px 150px 225px 150px;
+    font-size: larger;
+}
+
+
+
+#portfolio-container,
+#contact {
+    padding: 50px 150px 50px 150px;
+}
+
+#about,
+#contact {
+    background-color: rgb(84, 191, 136);
+}
+
+.intro {
+    width: 50%;
+}
+
+.project-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: left;
+}
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 50px;
+    max-width: 1000px;
 }
 
 .container div{
@@ -20,4 +62,31 @@
     border-radius: 5px;
     flex: 1;
     object-fit: contain;
+}
+
+#contact {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.logos {
+    display: flex;
+    gap: 25px;
+}
+
+.github-logo,
+.linkedin-logo {
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+}
+
+.github-logo {
+    background-image: url("./img/github-logo.png")
+}
+
+.linkedin-logo {
+    background-image: url("./img/linkedin-logo.png")
 }
