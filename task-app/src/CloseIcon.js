@@ -3,7 +3,16 @@ import Logo from "./img/xmark.png";
 
 class CloseIcon extends Component {
     render() {
-        return <img className="x-logo" src={Logo} alt="" />;
+        const { task, removeFunction } = this.props;
+        return (
+            <img
+                className="x-logo"
+                src={Logo}
+                alt=""
+                data-remove={task.id}
+                onClick={removeFunction}
+            />
+        );
     }
 }
 

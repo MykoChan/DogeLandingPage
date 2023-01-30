@@ -3,11 +3,11 @@ import CloseIcon from "./CloseIcon";
 
 class Task extends Component {
     render() {
-        const { task } = this.props;
+        const { task, removeFunction } = this.props;
         return (
             <div className="task-container">
                 <div className="task">{task.text}</div>
-                <CloseIcon />
+                <CloseIcon task={task} removeFunction={removeFunction} />
             </div>
         );
     }

@@ -14,6 +14,8 @@ class App extends Component {
             },
             tasks: [],
         };
+
+        this.onClickRemove = this.onClickRemove.bind(this);
     }
 
     handleChange = (e) => {
@@ -29,6 +31,15 @@ class App extends Component {
         e.preventDefault();
         this.setState({
             tasks: this.state.tasks.concat(this.state.task),
+            task: { text: "", id: uniqid() },
+        });
+    };
+
+    onClickRemove = (e) => {
+        this.setState({
+            tasks: this.state.tasks.filter((task) => {
+                return task.id !== e.target.dataset.remove;
+            }),
             task: { text: "", id: uniqid() },
         });
     };
@@ -51,7 +62,7 @@ class App extends Component {
                         <button type="submit"> Add Task </button>
                     </div>
                 </form>
-                <Overview tasks={tasks} />
+                <Overview tasks={tasks} removeFunction={this.onClickRemove} />
             </div>
         );
     }
