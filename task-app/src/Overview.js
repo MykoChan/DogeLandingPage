@@ -4,7 +4,7 @@ import Task from "./Task";
 
 class Overview extends Component {
     render() {
-        const { tasks, removeFunction } = this.props;
+        const { tasks, remove, toggleEdit, onEdit, applyEdit } = this.props;
         return (
             <div className="overview-container">
                 {tasks.map((task) => {
@@ -12,7 +12,10 @@ class Overview extends Component {
                         <Task
                             key={task.id}
                             task={task}
-                            removeFunction={removeFunction}
+                            remove={remove}
+                            toggleEdit={toggleEdit}
+                            onEdit={onEdit}
+                            applyEdit={applyEdit}
                         />
                     );
                 })}

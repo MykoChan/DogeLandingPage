@@ -20,17 +20,24 @@ form {
     flex-direction: column;
     width: 50%;
     min-height: 150px;
+    gap: 5px;
 }
 
 .task-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5px;
+    padding: 5px;    
 }
 
 
-.x-logo {
+.icons {
+    display: flex;
+    gap: 10px;
+}
+
+.x-logo,
+.edit-logo {
     width: 25px;
     height: 25px;
 }
