@@ -77,7 +77,8 @@
 }
 
 .github-logo,
-.linkedin-logo {
+.linkedin-logo,
+.hackerrank-logo {
     background-size: cover;
     height: 50px;
     width: 50px;
@@ -89,4 +90,8 @@
 
 .linkedin-logo {
     background-image: url("./img/linkedin-logo.png")
+}
+
+.hackerrank-logo {
+    background-image: url("./img/hackerrank-logo.jpg")
 }
